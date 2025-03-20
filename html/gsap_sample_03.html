@@ -13,21 +13,53 @@
 
         <script src="../resource/lib/jQuery/jquery-3.6.0.js"></script>
         <script src="../resource/lib/jQuery/jquery-ui/jquery-ui.js"></script>
-        <script src="../resource/js/gsap.js"></script>
     </head>
 
     <body>
-        <div class="box3 box3-1"></div>
+        <div class="box-3 box3-1"></div>
         <div class="nav">
-        <button id="play">시작</button>
-        <button id="pause">정지</button>
-        <button id="resume">재개</button>
-        <button id="reverse">반전</button>
-        <button id="restart">재시작</button>
+            <button id="play">시작</button>
+            <button id="pause">정지</button>
+            <button id="resume">재개</button>
+            <button id="reverse">반전</button>
+            <button id="restart">재시작</button>
         </div>
 
         <!-- gsap -->
         <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", (event) => {
+                var tween = gsap.to(".box3-1", {
+                    duration: 5, x: 500, width: 500, paused: true,
+                });
+
+                document.querySelector("#play").addEventListener('click', function() {
+                    return tween.play();
+                });
+                document.querySelector("#pause").addEventListener('click', function() {
+                    return tween.pause();
+                });
+
+
+                var resumBtn = document.querySelector("#resume");
+
+                function resume () {
+                    return tween.resume();
+                };
+
+                resumBtn.addEventListener('click', resume);
+
+
+                var reverseBtn = document.querySelector("#reverse");
+
+                reverseBtn.addEventListener('click', function(){
+                    return tween.reverse();
+                });
+
+                document.querySelector("#restart").onclick = function() { return tween.restart(); }
+            });
+        </script>
     </body>
 </html>
