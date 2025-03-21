@@ -31,10 +31,11 @@
 
             gsap.to(".box", {
                 scrollTrigger: {
-                    trigger: ".box",
+                    trigger: ".box2",
                     markers: true,
                     start: "top center",
-                    scrub: 2, // 스크롤에 맞춰 움직임, true보단 값을 많이 줄 수록 부드러움, duration과 toggleAction은 무시됨
+                    scrub: true,
+                    pin: true, // 화면에 고정
                 },
                 x: 800,
             });
