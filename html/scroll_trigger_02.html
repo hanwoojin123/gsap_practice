@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- <link rel="icon" href="../../resource/images/common/favicon-16x16.ico" type="image/x-icon"> -->
+        <title>gsap practice</title>
+
+        <link rel="stylesheet" href="../resource/lib/jQuery/jquery-ui/jquery-ui.css">
+        <link rel="stylesheet" href="../resource/lib/jQuery/jquery-ui/jquery-ui.theme.css">
+
+        <script src="../resource/lib/jQuery/jquery-3.6.0.js"></script>
+        <script src="../resource/lib/jQuery/jquery-ui/jquery-ui.js"></script>
+
+        <style>
+            body { position: relative; height: 300vh; }
+            .box { position: absolute; top: 50%; left: 0; transform: translateY(-50%); width: 200px; height: 200px; background-color: tomato; }
+        </style>
+    </head>
+
+    <body>
+        <div class="box"></div>
+
+        <!-- gsap -->
+        <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
+
+        <script>
+                console.log("스크립트");
+                gsap.registerPlugin(ScrollTrigger);
+
+                gsap.to(".box", {
+                    scrollTrigger: {
+                        trigger: ".box",
+                        start: "top center",
+                        markers: true,
+                        toggleActions: "play none reverse none",
+                        // toggleActions: "onEnter onLeave onEnterBack onLeaveBack"
+                        // onEnter	트리거 지점에 처음 진입할 때 실행
+                        // onLeave	트리거 지점을 넘어갔을 때 실행
+                        // onEnterBack	아래로 스크롤했다가 다시 위로 올라와서 진입할 때 실행
+                        // onLeaveBack	위쪽으로 스크롤해서 트리거 지점을 벗어날 때 실행
+
+                        // "play"	애니메이션을 재생
+                        //  "pause"	애니메이션을 일시 정지
+                        //  "resume"	일시 정지된 애니메이션을 재개
+                        //  "reverse"	애니메이션을 반대로 재생
+                        //  "restart"	애니메이션을 처음부터 다시 실행
+                        //  "reset"	애니메이션을 처음 상태로 되돌리고 정지
+                        //  "complete"	애니메이션을 끝까지 진행
+                        //  "none"	아무 동작도 하지 않음
+
+                    },
+                    x: 800, duration: 2,
+                });
+        </script>
+    </body>
+</html>
