@@ -45,11 +45,11 @@
                 <img src='https://images.unsplash.com/photo-1607706189992-eae578626c86?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'>
             </div>
             <div class='txt_area'>
-            <ul class='txt_container'>
-                <li>GSAP</li>
-                <li>ScrollTrigger</li>
-                <li>SmoothScroll</li>
-            </ul>
+                <ul class='txt_container'>
+                    <li>GSAP</li>
+                    <li>ScrollTrigger</li>
+                    <li>SmoothScroll</li>
+                </ul>
             </div>
         </section>
 
@@ -79,8 +79,6 @@
             gsap.set(images, { zIndex: 0, opacity: 0 }); // 모든 이미지의 z-index값과 opacity를 0으로 설정
             gsap.set(images[0], { opacity: 1, zIndex: 1 }); // 첫 번째 이미지만 보이게 설정
 
-            // GSAP ScrollTrigger 설정
-            gsap.registerPlugin(ScrollTrigger);
             const timeline = gsap.timeline({
                 scrollTrigger: {
                     trigger: ".img_area",
