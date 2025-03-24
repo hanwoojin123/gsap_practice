@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- <link rel="icon" href="../../resource/images/common/favicon-16x16.ico" type="image/x-icon"> -->
+        <title>gsap practice</title>
+
+        <link rel="stylesheet" href="../resource/lib/jQuery/jquery-ui/jquery-ui.css">
+        <link rel="stylesheet" href="../resource/lib/jQuery/jquery-ui/jquery-ui.theme.css">
+
+        <script src="../resource/lib/jQuery/jquery-3.6.0.js"></script>
+        <script src="../resource/lib/jQuery/jquery-ui/jquery-ui.js"></script>
+
+        <style>
+            /* reset.css */
+            html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed,  figure, figcaption, footer, header, hgroup,  menu, nav, output, ruby, section, summary, time, mark, audio, video {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            font-size: 100%;
+            vertical-align: top;
+            box-sizing: border-box;
+            }
+            body { line-height: 1; }
+            ol, ul { list-style: none; }
+            /* reset.css */
+
+            section { width: 100%; overflow-x: hidden; }
+            .img_area { width: 100%; }
+            .img_area img { width: 100%; height: 100vh; object-fit: cover; position: absolute; left: 0; top: 0; }
+
+            .txt_area { position: relative; }
+            .txt_area .txt_container { text-align: center; color: #fff; font-size: 3rem; }
+            .txt_area .txt_container li { height: 100vh; display: flex; align-items: center; justify-content: center; }
+        </style>
+    </head>
+
+    <body>
+        <section>
+            <div class='img_area'>
+                <img src='https://images.unsplash.com/photo-1607798748738-b15c40d33d57?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'>
+                <img src='https://images.unsplash.com/photo-1624377632657-3902bfd35958?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'>
+                <img src='https://images.unsplash.com/photo-1607706189992-eae578626c86?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'>
+            </div>
+            <div class='txt_area'>
+            <ul class='txt_container'>
+                <li>GSAP</li>
+                <li>ScrollTrigger</li>
+                <li>SmoothScroll</li>
+            </ul>
+            </div>
+        </section>
+
+        <!-- gsap -->
+        <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
+        <script src='https://unpkg.com/lenis@1.1.14/dist/lenis.min.js'></script>
+
+        <script>
+            gsap.registerPlugin(ScrollTrigger);
+            
+            // Lenis 초기화
+            const lenis = new Lenis({
+                duration: 1.2,
+                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+                smooth: true,
+            });
+
+            const raf = (time) => {
+                lenis.raf(time);
+                requestAnimationFrame(raf);
+            };
+            requestAnimationFrame(raf);
+
+            // 이미지 초기 설정
+            const images = document.querySelectorAll('.img_area img'); // querySelectorAll로 모든 이미지 가져와서 변수에 저장
+            gsap.set(images, { zIndex: 0, opacity: 0 }); // 모든 이미지의 z-index값과 opacity를 0으로 설정
+            gsap.set(images[0], { opacity: 1, zIndex: 1 }); // 첫 번째 이미지만 보이게 설정
+
+            // GSAP ScrollTrigger 설정
+            gsap.registerPlugin(ScrollTrigger);
+            const timeline = gsap.timeline({
+                scrollTrigger: {
+                    trigger: ".img_area",
+                    start: "top top",
+                    end: "bottom bottom",
+                    endTrigger: '.txt_container',
+                    scrub: true,
+                    pin: true,
+                    pinSpacing: false,
+                    onEnter: () => {
+                    gsap.to(images[0], { opacity: 1, zIndex: 1, duration: 0.7 }); // 페이지 로드 시 첫 번째 이미지 보이기
+                    }
+                },
+            });
+
+            // 각 텍스트 항목에 대한 ScrollTrigger 생성
+            gsap.utils.toArray('.txt_container li').forEach((li, index) => {
+                ScrollTrigger.create({
+                    trigger: li,
+                    start: 'top 80%',
+                    end: 'bottom top',
+                    onEnter: () => {
+                        gsap.to(images[index], { opacity: 1, zIndex: 1, duration: 0.7 });
+                    },
+                    onLeaveBack: () => {
+                        gsap.to(images[index], { opacity: 0, zIndex: 0, duration: 0.7 });
+                    },
+                    markers: true,
+                });
+            });
+        </script>
+    </body>
+</html>

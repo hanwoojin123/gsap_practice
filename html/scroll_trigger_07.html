@@ -55,15 +55,19 @@
             let SECTIONS = gsap.utils.toArray("section");
 
             gsap.to(SECTIONS, {
-            xPercent: -100 * ( SECTIONS.length -1 ),
-            ease: "none",
-            scrollTrigger: {
-                trigger: '#container',
-                end: ()=> "+=" + document.querySelector("#container").offsetWidth,
-                pin: true,
-                scrub: 1,
-                snap: 1 / (SECTIONS.length -1),
-            }
+                xPercent: -100 * ( SECTIONS.length -1 ), // section이 5개이므로 옆으로 4개가 빠질 수 있게 section너비 기준 100%에서 section의 갯수에 1개를 뺀 너비를 곱함 -> 400%
+                ease: "none",
+                scrollTrigger: {
+                    trigger: '#container', // 전체 스크롤 범위를 설정하기 위해 container를 트리거로 사용
+                    // end: function() {
+                    //     return "+=" + document.querySelector("#container").offsetWidth;
+                    // },
+                    end: ()=> "+=" + document.querySelector("#container").offsetWidth,
+                    // 기존의 end 위치에 #container의 offsetWidth 값을 더함, 즉, end는 스크롤 애니메이션이 끝나는 위치를 계산할 때, #container 요소의 전체 너비만큼 스크롤이 진행된 후에 애니메이션이 끝나게 설정
+                    pin: true,
+                    scrub: 1,
+                    snap: 1 / (SECTIONS.length -1),
+                }
             });
         </script>
     </body>

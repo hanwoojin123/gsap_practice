@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- <link rel="icon" href="../../resource/images/common/favicon-16x16.ico" type="image/x-icon"> -->
+        <title>gsap practice</title>
+
+        <link rel="stylesheet" href="../resource/lib/jQuery/jquery-ui/jquery-ui.css">
+        <link rel="stylesheet" href="../resource/lib/jQuery/jquery-ui/jquery-ui.theme.css">
+
+        <script src="../resource/lib/jQuery/jquery-3.6.0.js"></script>
+        <script src="../resource/lib/jQuery/jquery-ui/jquery-ui.js"></script>
+
+        <style>
+            body{background:#000;font-weight:700;font-family:'pretendard'}
+            
+            #sample { position: relative; height: 200vh; font-size: 4vw; font-weight: 700; color: #fff; }
+            #sample .txt_area { position: sticky; top: 300px; display: flex; align-items: center; justify-content: center; }
+            #sample .txt_area p { overflow: hidden; white-space: nowrap; }
+            #sample .txt_area p+p { margin-left: 10px; }
+            #sample .txt_area .word01,
+            #sample .txt_area .word02 { opacity: 0; width: 0; }
+        </style>
+    </head>
+
+    <body>
+        <article id="sample">
+            <div class="inner txt_area">
+                <p>AI 기술</p>
+                <p class="txt word01">+ 콘텐츠 혁신</p>
+                <p class="txt word02">+ 샘플의 전문 노하우</p>
+            </div>
+        </article>
+
+        <!-- gsap -->
+        <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
+
+        <script>
+            gsap.registerPlugin(ScrollTrigger);
+            
+            const timeline = gsap.timeline({
+                scrollTrigger: {
+                    trigger: '#sample',
+                    start: '30% center',
+                    end: '101% bottom',
+                    scrub: 2,
+                }
+            });
+
+            timeline.to('.word01', { 
+                width: 'auto',
+                opacity: 1,
+                duration: 1.2,
+            })
+            .to('.word02', { 
+                width: 'auto',
+                opacity: 1,
+                duration: 1.2,
+            });
+
+            // ScrollTrigger.create({
+            //     animation: timeline,
+            //     trigger: '#sample',
+            //     start: '30% center',
+            //     end: '101% bottom',
+            //     scrub: 2,
+            // });
+
+            // gsap.timeline({
+            //     scrollTrigger: {
+            //         trigger: '#sample',
+            //         start: '30% center',
+            //         end: '101% bottom',
+            //         scrub: 2,
+            //     }
+            // })
+            // .to('.word01', { 
+            //     width: 'auto',
+            //     opacity: 1,
+            //     duration: 1.2,
+            // })
+            // .to('.word02', { 
+            //     width: 'auto',
+            //     opacity: 1,
+            //     duration: 1.2,
+            // });
+        </script>
+    </body>
+</html>
