@@ -40,6 +40,9 @@
     </head>
 
     <body>
+        <section>
+            <p style="height: 1000px;"></p>
+        </section>
         <article id="inc03">
             <div class="inc03_wrap">
                 <div class="gsap_slide_wrap">
@@ -70,6 +73,9 @@
                 </div>
             </div>
         </article>
+        <section>
+            <p style="height: 1000px;"></p>
+        </section>
 
         <!-- gsap -->
         <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
@@ -78,18 +84,32 @@
         <script>
             gsap.registerPlugin(ScrollTrigger);
 
-            gsap.to("#inc03 .gsap_slide_wrap", {
-                scrollTrigger:{
-                    start:"-15% top",
-                    trigger:"#inc03 .inc03_wrap",
-                    onEnter:() => {
-                        gsap.to("#inc03 .gsap_slide_wrap", {opacity:"1",filter:"blur(0)", duration:0.3})
-                    },
-                    onLeaveBack:() => {
-                        gsap.to("#inc03 .gsap_slide_wrap", {opacity:"0",filter:"blur(10px)", duration:0.3})
-                    }
+            ScrollTrigger.create({
+                trigger: "#inc03 .gsap_slide_wrap",
+                start: "-15% top",
+                onEnter: () => {
+                    gsap.to("#inc03 .gsap_slide_wrap", { opacity: "1", filter: "blur(0)", duration: 0.3 });
                 },
-            })
+                onLeaveBack: () => {
+                    gsap.to("#inc03 .gsap_slide_wrap", { opacity: "0", filter: "blur(10px)", duration: 0.3 });
+                },
+                markers: true,
+            });
+
+            // gsap.to("#inc03 .gsap_slide_wrap", {
+            //     scrollTrigger:{
+            //         trigger: "#inc03 .gsap_slide_wrap",
+            //         start: "-15% top",
+            //         // start의 기준점을 gsap_slide_wrap으로 지정(gsap_slide_wrap의 -15% 지점부터 실행), trigger를 지정하지 않으면 전체 화면 기준으로 -15%가 시작점이 됨 -> 화면 위로 시작점이 올라가서 화면 로드시 스크롤 하지 않아도 애니메이션 바로 실행
+            //         onEnter:() => {
+            //             gsap.to("#inc03 .gsap_slide_wrap", {opacity:"1",filter:"blur(0)", duration:0.3})
+            //         },
+            //         onLeaveBack:() => {
+            //             gsap.to("#inc03 .gsap_slide_wrap", {opacity:"0",filter:"blur(10px)", duration:0.3})
+            //         },
+            //         markers: true,
+            //     },
+            // })
 
             // timeline:똑같은 위치에서 이미지가 변경되는 오류
             // scrub:애니메이션 동기화 때문에 toggleAction, onEnter, onLeaveBack 사용불가로 인한 오류
