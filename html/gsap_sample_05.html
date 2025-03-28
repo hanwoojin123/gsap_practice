@@ -203,7 +203,7 @@
             </div>
         </main>
         <!-- //main -->
-    
+
         <footer id="footer">
             <a href="https://duektmf34.tistory.com/" target="_blank">BLOG</a>
         </footer>
@@ -214,38 +214,98 @@
         <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
 
         <script>
-            // 글씨 분리하기
             document.querySelectorAll(".split").forEach(desc => {
                 let splitText = desc.innerText;
-                let splitWrap = splitText.split('').join("</span><span aria-hidden:'true'>");
-                    splitWrap = "<span aria-hidden:'true'>" + splitWrap + "</span>";
+                let splitWrap = splitText.split('').join("</span><span>");
+                    splitWrap = `<span>${splitWrap}</span>`;
                     desc.innerHTML = splitWrap;
-                    desc.setAttribute("aria-label", splitText);
             });
 
-            // 메인 기본세팅
-            gsap.set(".text__inner .ti1", {opacity: 0, y: "10vh"});
-            gsap.set(".text__inner .ti2 span", {opacity: 0, x: 500, scale: 10, display: "inline-block", minWidth: "1.6vw"});
-            gsap.set(".text__inner .ti3", {opacity: 0, y: "-10vh"});
-            gsap.set(".img__inner .ii1", {opacity: 0, scale: 5});
-            gsap.set(".img__inner .ii2", {opacity: 0, scale: 5});
-            gsap.set(".img__inner .ii3", {opacity: 0, scale: 5});
-            gsap.set("#header", {y: -100});
-            gsap.set("#footer", {y: 100});
+            gsap.set(".text__inner .ti1", {
+                opacity: 0, y: "10vh",
+            });
+            gsap.set(".text__inner .ti2 span", {
+                opacity: 0, x: 500, scale: 10, display: "inline-block", minWidth: "1.6vw"
+            });
+            gsap.set(".text__inner .ti3", {
+                opacity: 0, y: "-10vh",
+            });
+            gsap.set(".img__inner .ii1", {
+                opacity: 0, scale: 5,
+            });
+            gsap.set(".img__inner .ii2", {
+                opacity: 0, scale: 5,
+            });
+            gsap.set(".img__inner .ii3", {
+                opacity: 0, scale: 5,
+            });
+            gsap.set("#header", {
+                y: -100,
+            });
+            gsap.set("#footer", {
+                y: 100,
+            });
 
-            // 메인 애니메이션\
             setTimeout(() => {
                 let tl = gsap.timeline();
 
-                tl.to(".text__inner .ti2 span", {opacity: 1, scale: 1, x: 0, duration: 0.6, stagger: 0.1, ease: Power3.easeInOut})
-                tl.to(".text__inner .ti1", {opacity: 1, y: 0, duration: 0.5, ease: Circ.easOut}, "ee +=0.5")
-                tl.to(".text__inner .ti3", {opacity: 1, y: 0, duration: 0.5, ease: Circ.easOut}, "ee +=0.5")
-                tl.to(".img__inner .ii1", {duration: 0.5, opacity: 1, scale: 1,  y: "-40vh"}, "+=0.5")
-                tl.to(".img__inner .ii2", {duration: 0.5, opacity: 1, scale: 1, x: -50, y: "-3vh"}, "+=0.5")
-                tl.to(".img__inner .ii3", {duration: 0.5, opacity: 1, scale: 1, y: "10vh"}, "+=0.5")
-                tl.to("#header", {duration: 0.5, y: 0}, "ss +=0.5");
-                tl.to("#footer", {duration: 0.5, y: 0}, "ss +=0.5");
-            }, 3000);
+                tl.to(".text__inner .ti2 span", {
+                    opacity: 1, x: 0, scale: 1, duration: 0.6, stagger: 0.1, ease: Power3.easeInOut
+                });
+                tl.to(".text__inner .ti1", {
+                    opacity: 1, y: 0, duration: 0.5, ease: Circ.easOut,
+                }, "ee +=0.5");
+                tl.to(".text__inner .ti3", {
+                    opacity: 1, y: 0, duration: 0.5, ease: Circ.easOut,
+                }, "ee +=0.5");
+                tl.to(".img__inner .ii1", {
+                    opacity: 1, scale: 1, duration: 0.5, y: "-40vh",
+                }, "+=0.5");
+                tl.to(".img__inner .ii2", {
+                    opacity: 1, scale: 1, duration: 0.5, x: -50, y: "-3vh",
+                }, "+=0.5");
+                tl.to(".img__inner .ii3", {
+                    opacity: 1, scale: 1, duration: 0.5, y: "10vh",
+                }, "+=0.5");
+                tl.to("#header", {
+                    y: 0, duration: 0.5,
+                }, "ss +=0.5");
+                tl.to("#footer", {
+                    y: 0, duration: 0.5,
+                }, "ss +=0.5");
+            }, 1000);
+
+            // // 글씨 분리하기
+            // document.querySelectorAll(".split").forEach(desc => {
+            //     let splitText = desc.innerText;
+            //     let splitWrap = splitText.split('').join("</span><span>");
+            //         splitWrap = "<span>" + splitWrap + "</span>";
+            //         desc.innerHTML = splitWrap;
+            // });
+
+            // // 메인 기본세팅
+            // gsap.set(".text__inner .ti1", {opacity: 0, y: "10vh"});
+            // gsap.set(".text__inner .ti2 span", {opacity: 0, x: 500, scale: 10, display: "inline-block", minWidth: "1.6vw"});
+            // gsap.set(".text__inner .ti3", {opacity: 0, y: "-10vh"});
+            // gsap.set(".img__inner .ii1", {opacity: 0, scale: 5});
+            // gsap.set(".img__inner .ii2", {opacity: 0, scale: 5});
+            // gsap.set(".img__inner .ii3", {opacity: 0, scale: 5});
+            // gsap.set("#header", {y: -100});
+            // gsap.set("#footer", {y: 100});
+
+            // // 메인 애니메이션\
+            // setTimeout(() => {
+            //     let tl = gsap.timeline();
+
+            //     tl.to(".text__inner .ti2 span", {opacity: 1, scale: 1, x: 0, duration: 0.6, stagger: 0.1, ease: Power3.easeInOut}) // stagger: 0.1 -> 0.1초 차이로 각 span 애니메이션 실행
+            //     tl.to(".text__inner .ti1", {opacity: 1, y: 0, duration: 0.5, ease: Circ.easOut}, "ee +=0.5");
+            //     tl.to(".text__inner .ti3", {opacity: 1, y: 0, duration: 0.5, ease: Circ.easOut}, "ee +=0.5");
+            //     tl.to(".img__inner .ii1", {duration: 0.5, opacity: 1, scale: 1,  y: "-40vh"}, "+=0.5");
+            //     tl.to(".img__inner .ii2", {duration: 0.5, opacity: 1, scale: 1, x: -50, y: "-3vh"}, "+=0.5");
+            //     tl.to(".img__inner .ii3", {duration: 0.5, opacity: 1, scale: 1, y: "10vh"}, "+=0.5");
+            //     tl.to("#header", {duration: 0.5, y: 0}, "ss +=0.5");
+            //     tl.to("#footer", {duration: 0.5, y: 0}, "ss +=0.5");
+            // }, 1000);
         </script>
     </body>
 </html>
